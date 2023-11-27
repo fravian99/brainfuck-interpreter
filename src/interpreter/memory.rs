@@ -155,6 +155,16 @@ mod tests {
 
     #[test]
     pub fn test_decrement_value() {
-        todo!();
+        let pointer = 0;
+        let mut memory = Memory::new(pointer);
+
+        memory.increment_value(2);
+        memory.decrement_value(1);
+        assert_eq!(memory.get_value(), 1);
+
+        memory.increment_pointer(1); //New value
+        memory.increment_value(u8::MAX);
+        memory.decrement_value(u8::MAX);
+        assert_eq!(memory.get_value(), 0);
     }
 }
