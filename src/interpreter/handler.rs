@@ -30,6 +30,13 @@ impl Handler {
         }
     }
 }
+impl Default for Handler {
+    fn default() -> Self {
+        Self {
+            memory: Memory::new(0),
+        }
+    }
+}
 
 #[cfg(test)]
 mod tests {
@@ -41,7 +48,7 @@ mod tests {
     fn test_execute_pointer() {
         let mut instructions: Vec<Instruction> = Vec::new();
         let initial = 2;
-        let mut handler = Handler::new();
+        let mut handler = Handler::default();
 
         instructions.push(Instruction::IncrementPointer(initial));
         handler.execute(&instructions);
