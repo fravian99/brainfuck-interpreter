@@ -75,5 +75,9 @@ mod tests {
         instructions.push(Instruction::None);
         handler.execute(&instructions);
         assert!(true);
+
+        instructions.push(Instruction::Output);
+        handler.execute(&instructions);
+        assert!(true);
     }
 }
