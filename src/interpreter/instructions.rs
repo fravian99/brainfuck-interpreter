@@ -32,6 +32,7 @@ mod tests {
     use super::Instruction;
     #[test]
     pub fn test_from_char() {
+        dbg!(Instruction::IncrementPointer(1));
         assert_eq!(Instruction::from(&'>'), Instruction::IncrementPointer(1));
         assert_eq!(Instruction::from(&'<'), Instruction::DecrementPointer(1));
         assert_eq!(Instruction::from(&'+'), Instruction::IncrementValue(1));
