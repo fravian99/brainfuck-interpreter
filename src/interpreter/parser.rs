@@ -15,12 +15,16 @@ mod tests {
 
     #[test]
     fn test_from_string_to_instructions() {
-        let code_string = "><+-";
+        let code_string = "><+-,.[]";
         let expected_instructions = vec![
             Instruction::IncrementPointer(1),
             Instruction::DecrementPointer(1),
             Instruction::IncrementValue(1),
             Instruction::DecrementValue(1),
+            Instruction::Input,
+            Instruction::Output,
+            Instruction::OpenLoop,
+            Instruction::CloseLoop,
         ];
         let instructions = from_string_to_instructions(code_string);
         assert_eq!(expected_instructions, instructions);

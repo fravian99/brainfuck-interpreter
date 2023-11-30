@@ -44,6 +44,9 @@ impl Memory {
     pub fn decrement_value(&mut self, decrement: u8) {
         self.blocks[self.pointer as usize] -= decrement;
     }
+    pub fn set_value(&mut self, new_value: u8) {
+        self.blocks[self.pointer as usize] = new_value;
+    }
 }
 
 impl Display for Memory {
@@ -57,13 +60,19 @@ impl Display for Memory {
     }
 }
 
+impl Default for Memory {
+    fn default() -> Self {
+        Self::new(0)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::Memory;
 
     #[test]
     pub fn test_new() {
-        let memory = Memory::new(0);
+        let memory = Memory::default();
         let pointer = memory.get_pointer();
         let value = memory.get_value();
         assert_eq!(pointer, 0);
@@ -82,7 +91,7 @@ mod tests {
 
     #[test]
     pub fn test_increment_pointer() {
-        let mut memory = Memory::new(0);
+        let mut memory = Memory::default();
         let pointer = 0;
         let increment = 1;
 
@@ -155,8 +164,7 @@ mod tests {
 
     #[test]
     pub fn test_decrement_value() {
-        let pointer = 0;
-        let mut memory = Memory::new(pointer);
+        let mut memory = Memory::default();
 
         memory.increment_value(2);
         memory.decrement_value(1);
@@ -166,5 +174,13 @@ mod tests {
         memory.increment_value(u8::MAX);
         memory.decrement_value(u8::MAX);
         assert_eq!(memory.get_value(), 0);
+    }
+
+    #[test]
+    pub fn test_set_value() {
+        let mut memory = Memory::default();
+
+        memory.set_value(10);
+        assert_eq!(memory.get_value(), 10);
     }
 }
