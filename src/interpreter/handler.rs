@@ -34,7 +34,7 @@ impl Handler {
                 Instruction::Input => {
                     let mut input = String::new();
                     io::stdin().read_line(&mut input).expect("Error");
-                    self.memory.set_value(input.bytes().nth(0).unwrap());
+                    self.memory.set_value(input.as_bytes()[0]);
                 }
                 Instruction::OpenLoop => {
                     if self.memory.get_value() != 0 {
@@ -45,14 +45,9 @@ impl Handler {
                 }
                 Instruction::CloseLoop => {
                     if self.memory.get_value() != 0 {
-                        match loops.last() {
-                            Some(&x) => instruction_pointer = x as usize,
-                            None => (),
-                        }
-                    } else {
-                        if loops.last().is_some() {
-                            loops.pop();
-                        }
+                        if let Some(&x) = loops.last() { instruction_pointer = x }
+                    } else if loops.last().is_some() {
+                        loops.pop();
                     }
                 }
                 Instruction::None => (),
