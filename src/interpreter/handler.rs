@@ -18,7 +18,7 @@ impl Handler {
     pub fn clear_memory(&mut self){
         self.memory = Memory::default();
     }
-    pub fn execute(&mut self, code: &Vec<Instruction>) {
+    pub fn execute(&mut self, code: &[Instruction]) {
         let mut instruction_pointer = 0;
         let mut loops: Vec<usize> = Vec::new();
         while instruction_pointer < code.len() {
