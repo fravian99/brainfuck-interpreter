@@ -3,7 +3,7 @@ use super::instructions::Instruction;
 pub fn from_string_to_instructions(code: &str) -> Vec<Instruction> {
     let mut instructions: Vec<Instruction> = Vec::new();
     for i in code.chars() {
-        instructions.push(Instruction::from(&i));
+        instructions.push(Instruction::from(i));
     }
     instructions
 }
